@@ -21,7 +21,7 @@ let animateInTarget = null;   // 마지막 애니메이션 대상 추적
 
 // ── VIP 화자 표시 여부 ───────────────────────────────────────
 let vipVisible = false;
-const VIP_COUNT = 3; // speakers 배열 뒤에서 N명
+const VIP_COUNT = 5; // speakers 배열 뒤에서 N명
 
 function toggleVip() {
   vipVisible = !vipVisible;
