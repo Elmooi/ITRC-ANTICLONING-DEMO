@@ -22,6 +22,8 @@ const CONFIG = {
     { id: "ryujm",  name: "류제명 2차관", folder: "류제명 2차관", gender: "M" },
     { id: "park",   name: "박태완 국장",  folder: "박태완 국장",  gender: "M" },
     { id: "lee",    name: "이도규 실장",  folder: "이도규 실장",  gender: "M" },
+    { id: "hong",   name: "홍진배 원장",  folder: "홍진배 원장",  gender: "M" },
+    { id: "bae",    name: "배경훈 장관",  folder: "배경훈 장관",  gender: "M" },
   ],
 
   // 오디오 경로 반환 함수 (demo/ 폴더 기준 상대경로)
