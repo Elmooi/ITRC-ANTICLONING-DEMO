@@ -5,14 +5,14 @@
 
 const CONFIG = {
   projectName: "Anti-Cloning",
-  subtitle: "Deepfake Generation Suppression System",
+  subtitle: "Proactive protection System",
   tagline: "Technology to protect voices from audio deepfakes",
-  institution: "ViVaTech 2026",
+  institution: "VivaTech 2026",
 
   speakers: [
-    { id: "dicaprio",    name: "DiCaprio",    folder: "디카프리오", gender: "M" },
+    { id: "dicaprio",    name: "Leonardo Dicaprio",    folder: "디카프리오", gender: "M" },
     { id: "charlieputh", name: "Charlie Puth", folder: "찰리푸스",  gender: "M" },
-    { id: "ariana",      name: "Ariana",       folder: "아리아나",  gender: "F" },
+    { id: "ariana",      name: "Ariana Grande",       folder: "아리아나",  gender: "F" },
   ],
 
   getAudioPaths(speaker) {
