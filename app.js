@@ -1,43 +1,30 @@
 /* ============================================================
-   AntiFake Demo — 메인 애플리케이션 로직
+   AntiFake Demo — Main Application Logic
    ============================================================ */
 
-// ── 페이지 정의 ──────────────────────────────────────────────
+// ── Page Definitions ──────────────────────────────────────────────
 const PAGES = [
-  { id: "page-1", label: "소개" },
-  { id: "page-2", label: "기술 개요" },
-  { id: "page-3", label: "음성 데모" },
-  { id: "page-4", label: "TTS 데모" },
-  { id: "page-5", label: "비교 청취" },
+  { id: "page-1", label: "Intro" },
+  { id: "page-2", label: "Overview" },
+  { id: "page-3", label: "Audio Demo" },
+  { id: "page-4", label: "TTS Demo" },
+  { id: "page-5", label: "Comparison" },
 ];
 
-// ── 상태 ─────────────────────────────────────────────────────
+// ── State ─────────────────────────────────────────────────────
 let currentPage = 0;
 let activeSpeakerIndex = 0;
-let allPlayers = [];          // 전체 정지용
+let allPlayers = [];
 const initializedPages = new Set();
-const speakerUpdateFns = {};  // pageIndex → fn(speaker)
-let animateInTarget = null;   // 마지막 애니메이션 대상 추적
+const speakerUpdateFns = {};
+let animateInTarget = null;
 
-// ── VIP 화자 표시 여부 ───────────────────────────────────────
-let vipVisible = false;
-const VIP_COUNT = 5; // speakers 배열 뒤에서 N명
-
-function toggleVip() {
-  vipVisible = !vipVisible;
-  document.querySelectorAll(".speaker-tab-vip").forEach(el => {
-    el.classList.toggle("hidden-vip", !vipVisible);
-  });
-}
-
-// ── 화자 선택 (전역) ────────────────────────────────────────
+// ── Speaker Selection (global) ────────────────────────────────
 function onSpeakerSelect(speaker) {
   activeSpeakerIndex = CONFIG.speakers.indexOf(speaker);
 
-  // 초기화된 모든 페이지 플레이어 업데이트
   Object.values(speakerUpdateFns).forEach(fn => fn(speaker));
 
-  // 모든 탭 UI 동기화
   document.querySelectorAll(".speaker-tabs").forEach(tabs => {
     tabs.querySelectorAll(".speaker-tab").forEach((btn, i) => {
       btn.classList.toggle("active", i === activeSpeakerIndex);
@@ -45,23 +32,21 @@ function onSpeakerSelect(speaker) {
   });
 }
 
-// ── 화자 탭 빌더 ─────────────────────────────────────────────
+// ── Speaker Tab Builder ─────────────────────────────────────────
 function buildSpeakerTabs(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = "";
-  const vipStart = CONFIG.speakers.length - VIP_COUNT;
   CONFIG.speakers.forEach((speaker, idx) => {
-    const isVip = idx >= vipStart;
     const btn = document.createElement("button");
-    btn.className = `speaker-tab${idx === activeSpeakerIndex ? " active" : ""}${isVip ? " speaker-tab-vip" : ""}${isVip && !vipVisible ? " hidden-vip" : ""}`;
+    btn.className = `speaker-tab${idx === activeSpeakerIndex ? " active" : ""}`;
     btn.textContent = speaker.name;
     btn.addEventListener("click", () => onSpeakerSelect(speaker));
     container.appendChild(btn);
   });
 }
 
-// ── AudioPlayer 클래스 (CSS animation 기반) ─────────────────
+// ── AudioPlayer Class ─────────────────────────────────────────
 class AudioPlayer {
   constructor({ container, src, type }) {
     this.audio = new Audio(src);
@@ -87,10 +72,10 @@ class AudioPlayer {
 
   _render() {
     const meta = {
-      source:     { badge: "badge-source",    btn: "btn-source",    fill: "fill-source",    badgeText: "원본 음성",   title: "원본 음성",   sub: "보호 적용 전 실제 음성"   },
-      protected:  { badge: "badge-protected", btn: "btn-protected", fill: "fill-protected", badgeText: "보호된 음성", title: "보호된 음성", sub: "보호 신호가 삽입된 음성"   },
-      "tts-orig": { badge: "badge-tts-orig",  btn: "btn-tts-orig",  fill: "fill-tts-orig",  badgeText: "원본 TTS",    title: "원본 TTS",    sub: "보호 없이 복제된 음성"     },
-      "tts-prot": { badge: "badge-tts-prot",  btn: "btn-tts-prot",  fill: "fill-tts-prot",  badgeText: "보호된 TTS",  title: "보호된 TTS",  sub: "복제 공격이 무력화된 음성" },
+      source:     { badge: "badge-source",    btn: "btn-source",    fill: "fill-source",    badgeText: "Original",          title: "Original Voice",   sub: "Actual voice before protection"   },
+      protected:  { badge: "badge-protected", btn: "btn-protected", fill: "fill-protected", badgeText: "Protected",         title: "Protected Voice",  sub: "Voice with protection signal embedded"   },
+      "tts-orig": { badge: "badge-tts-orig",  btn: "btn-tts-orig",  fill: "fill-tts-orig",  badgeText: "Original TTS",      title: "Original TTS",     sub: "Cloned voice without protection"     },
+      "tts-prot": { badge: "badge-tts-prot",  btn: "btn-tts-prot",  fill: "fill-tts-prot",  badgeText: "Protected TTS",     title: "Protected TTS",    sub: "Cloning attack neutralized" },
     }[this.type];
 
     this.container.innerHTML = `
@@ -100,10 +85,10 @@ class AudioPlayer {
             <div class="player-title">${meta.title}</div>
             <div class="player-subtitle">${meta.sub}</div>
           </div>
-          <span class="player-status status-idle" data-status>대기</span>
+          <span class="player-status status-idle" data-status>Idle</span>
         </div>
         <div class="player-controls">
-          <button class="play-btn ${meta.btn}" data-playbtn aria-label="재생/일시정지">
+          <button class="play-btn ${meta.btn}" data-playbtn aria-label="Play/Pause">
             ${this._playIcon()}
           </button>
           <div class="progress-wrap">
@@ -133,7 +118,6 @@ class AudioPlayer {
     });
   }
 
-  // CSS animation으로 진행 바를 구동 — currentTime polling 없이 완전 부드러움
   toggle() { this.state === "playing" ? this.pause() : this.play(); }
 
   play() {
@@ -190,11 +174,11 @@ class AudioPlayer {
   _setState(s) {
     this.state = s;
     const map = {
-      idle:    ["대기",     "status-idle"],
-      playing: ["재생 중",  "status-playing"],
-      paused:  ["일시정지", "status-paused"],
-      ended:   ["완료",    "status-ended"],
-      error:   ["오류",    "status-error"],
+      idle:    ["Idle",    "status-idle"],
+      playing: ["Playing", "status-playing"],
+      paused:  ["Paused",  "status-paused"],
+      ended:   ["Done",    "status-ended"],
+      error:   ["Error",   "status-error"],
     };
     const [label, cls] = map[s] || map.idle;
     this.$status.textContent = label;
@@ -218,7 +202,7 @@ class AudioPlayer {
   }
 }
 
-// ── 페이지 초기화 ────────────────────────────────────────────
+// ── Page Initialization ────────────────────────────────────────
 
 function initPage3() {
   const wrap = document.getElementById("page3-content");
@@ -292,7 +276,7 @@ function initPage5() {
 
 const pageInits = { 2: initPage3, 3: initPage4, 4: initPage5 };
 
-// ── 페이지 네비게이션 ────────────────────────────────────────
+// ── Page Navigation ────────────────────────────────────────────
 function goToPage(index) {
   if (index < 0 || index >= PAGES.length) return;
 
@@ -306,7 +290,6 @@ function goToPage(index) {
 
   currentPage = index;
 
-  // 최초 방문 시 초기화
   if (pageInits[index] && !initializedPages.has(index)) {
     initializedPages.add(index);
     pageInits[index]();
@@ -314,7 +297,6 @@ function goToPage(index) {
 
   pages[currentPage].classList.add("active");
 
-  // 페이지 진입 애니메이션 재트리거 (이전 RAF 무효화)
   const cur = pages[currentPage];
   cur.classList.remove("animate-in");
   animateInTarget = cur;
@@ -322,37 +304,32 @@ function goToPage(index) {
     if (animateInTarget === cur) cur.classList.add("animate-in");
   }));
 
-  // 히어로 페이지 진입 시 애니메이션 재트리거
   if (index === 0) {
     const heroEls = document.querySelectorAll(
       "#page-1 .hero-badge, #page-1 .hero-title, #page-1 .hero-subtitle, " +
       "#page-1 .hero-tagline, #page-1 .hero-cta, #page-1 .hero-scroll-hint"
     );
     heroEls.forEach(el => { el.style.animation = "none"; });
-    void document.querySelector("#page-1").offsetWidth; // force reflow
+    void document.querySelector("#page-1").offsetWidth;
     heroEls.forEach(el => { el.style.animation = ""; });
   }
 
-  // nav 스타일
   document.getElementById("nav").className = index === 0 ? "hero-mode" : "page-mode";
   document.getElementById("bottom-nav").style.display = index === 0 ? "none" : "flex";
-  // 레이블 & dots
   document.querySelectorAll(".page-dot").forEach((d, i) => d.classList.toggle("active", i === index));
 
   document.getElementById("btn-prev").disabled = index === 0;
   document.getElementById("btn-next").disabled = index === PAGES.length - 1;
 }
 
-// ── DOM 초기화 ───────────────────────────────────────────────
+// ── DOM Initialization ───────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
-  // 히어로 텍스트
   document.getElementById("hero-title").textContent        = CONFIG.projectName;
   document.getElementById("hero-subtitle").textContent     = CONFIG.subtitle;
   document.getElementById("hero-tagline").textContent      = CONFIG.tagline;
   document.getElementById("nav-project").textContent       = CONFIG.projectName;
   document.getElementById("hero-institution").textContent  = CONFIG.institution;
 
-  // 페이지 dots 생성
   const dotsWrap = document.getElementById("page-dots");
   PAGES.forEach((p, i) => {
     const d = document.createElement("button");
@@ -362,21 +339,17 @@ document.addEventListener("DOMContentLoaded", () => {
     dotsWrap.appendChild(d);
   });
 
-  // 버튼
   document.getElementById("btn-prev").addEventListener("click", () => goToPage(currentPage - 1));
   document.getElementById("btn-next").addEventListener("click", () => goToPage(currentPage + 1));
   document.getElementById("side-left").addEventListener("click",  () => goToPage(currentPage - 1));
   document.getElementById("side-right").addEventListener("click", () => goToPage(currentPage + 1));
   document.getElementById("hero-cta").addEventListener("click", () => goToPage(1));
 
-  // 키보드
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight" || e.key === "ArrowDown") goToPage(currentPage + 1);
     if (e.key === "ArrowLeft"  || e.key === "ArrowUp")   goToPage(currentPage - 1);
-    if (e.key === "p" || e.key === "P") toggleVip();
   });
 
-  // 첫 페이지 표시
   document.querySelector("#page-1").classList.add("active");
   document.getElementById("nav").className = "hero-mode";
   document.getElementById("btn-prev").disabled = true;
