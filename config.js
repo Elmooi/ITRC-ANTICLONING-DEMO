@@ -7,7 +7,7 @@ const CONFIG = {
   projectName: "Anti-Cloning",
   subtitle: "Deepfake Generation Suppression System",
   tagline: "Technology to protect voices from audio deepfakes",
-  institution: "ITRC Exhibition 2026",
+  institution: "ViVaTech 2026",
 
   speakers: [
     { id: "dicaprio",    name: "DiCaprio",    folder: "디카프리오", gender: "M" },
