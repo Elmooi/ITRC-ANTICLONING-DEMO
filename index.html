@@ -22,7 +22,10 @@
     <div id="page-dots" class="page-dots"></div>
   </div>
 
-  <span class="nav-spacer"></span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="ko">KO</button>
+  </div>
 </nav>
 
 <!-- ══════════════════════════════════════════
@@ -49,19 +52,12 @@
       <p class="hero-tagline" id="hero-tagline">Technology to protect voices from audio deepfakes</p>
 
       <button class="hero-cta" id="hero-cta">
-        Start Demo
+        <span id="hero-cta-text">Start Demo</span>
         <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
         </svg>
       </button>
     </div>
-
-    <!-- <div class="hero-scroll-hint">
-      <span>Next</span>
-      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M10 3a.75.75 0 0 1 .75.75v10.638l3.96-4.158a.75.75 0 1 1 1.08 1.04l-5.25 5.5a.75.75 0 0 1-1.08 0l-5.25-5.5a.75.75 0 1 1 1.08-1.04l3.96 4.158V3.75A.75.75 0 0 1 10 3z" clip-rule="evenodd"/>
-      </svg>
-    </div> -->
   </section>
 
   <!-- ── PAGE 2: Technology Overview ─────────────────── -->
@@ -69,30 +65,30 @@
     <div class="page-inner">
 
       <div class="page-header">
-        <span class="page-eyebrow">Technology Overview</span>
-        <h2 class="page-title">Why is Anti-Cloning Technology Needed?</h2>
-        <p class="page-desc">
+        <span class="page-eyebrow" id="p2-eyebrow">Technology Overview</span>
+        <h2 class="page-title" id="p2-title">Why is Anti-Cloning Technology Needed?</h2>
+        <p class="page-desc" id="p2-desc">
           With advances in deep learning, it has become possible to precisely replicate<br>
           anyone's voice from just a short audio sample.
         </p>
       </div>
       <div class="tech-cards">
 
-      <div class="tech-card tc-danger">
-        <span class="tech-card-num">01</span>
-        <div class="tech-icon danger">🎭</div>
-        <div class="tech-card-title">Voice Cloning Threat</div>
-        <div class="tech-card-body">
-          Modern AI voice synthesis can realistically reproduce a person's voice from just a short audio sample.<br>
-          Such technology is increasingly being exploited for voice phishing and unauthorized content creation.
+        <div class="tech-card tc-danger">
+          <span class="tech-card-num">01</span>
+          <div class="tech-icon danger">🎭</div>
+          <div class="tech-card-title" id="p2-card1-title">Voice Cloning Threat</div>
+          <div class="tech-card-body" id="p2-card1-body">
+            Modern AI voice synthesis can realistically reproduce a person's voice from just a short audio sample.<br>
+            Such technology is increasingly being exploited for voice phishing and unauthorized content creation.
+          </div>
         </div>
-      </div>
 
         <div class="tech-card tc-warning">
           <span class="tech-card-num">02</span>
           <div class="tech-icon warning">⚡</div>
-          <div class="tech-card-title">Cloning Attack Method</div>
-          <div class="tech-card-body">
+          <div class="tech-card-title" id="p2-card2-title">Cloning Attack Method</div>
+          <div class="tech-card-body" id="p2-card2-body">
             Attackers input publicly available voice data into TTS models to easily generate fake voices that sound like the original speaker.
             This poses a very high risk as anyone can attempt it without special equipment.
           </div>
@@ -101,8 +97,8 @@
         <div class="tech-card tc-success">
           <span class="tech-card-num">03</span>
           <div class="tech-icon success">🛡️</div>
-          <div class="tech-card-title">Our Technology's Solution</div>
-          <div class="tech-card-body">
+          <div class="tech-card-title" id="p2-card3-title">Our Technology's Solution</div>
+          <div class="tech-card-body" id="p2-card3-body">
             We embed imperceptible protection signals into audio.
             When TTS is trained on protected audio, the synthesizer fails to reproduce the speaker's voice.
           </div>
@@ -112,46 +108,46 @@
 
       <!-- Flow Diagram -->
       <div class="flow-section">
-      <p class="flow-title">Generation Suppression Pipeline</p>
-      <div class="flow-diagram">
-        <div class="flow-step">
-          <span class="flow-step-icon">🎙️</span>
-          <span class="flow-step-label">Original Voice</span>
-          <span class="flow-step-sub">Speaker's actual voice</span>
+        <p class="flow-title" id="p2-flow-title">Generation Suppression Pipeline</p>
+        <div class="flow-diagram">
+          <div class="flow-step">
+            <span class="flow-step-icon">🎙️</span>
+            <span class="flow-step-label" id="p2-flow1-label">Original Voice</span>
+            <span class="flow-step-sub" id="p2-flow1-sub">Speaker's actual voice</span>
+          </div>
+          <svg class="flow-arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
+          </svg>
+          <div class="flow-step highlight-green">
+            <span class="flow-step-icon">🛡️</span>
+            <span class="flow-step-label" id="p2-flow2-label">Protection Applied</span>
+            <span class="flow-step-sub" id="p2-flow2-sub">Inaudible signal embedded</span>
+          </div>
+          <svg class="flow-arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
+          </svg>
+          <div class="flow-step">
+            <span class="flow-step-icon">🔊</span>
+            <span class="flow-step-label" id="p2-flow3-label">Protected Voice</span>
+            <span class="flow-step-sub" id="p2-flow3-sub">Same listening quality</span>
+          </div>
+          <svg class="flow-arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
+          </svg>
+          <div class="flow-step">
+            <span class="flow-step-icon">🤖</span>
+            <span class="flow-step-label" id="p2-flow4-label">Clone Attempt</span>
+            <span class="flow-step-sub" id="p2-flow4-sub">TTS model training</span>
+          </div>
+          <svg class="flow-arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
+          </svg>
+          <div class="flow-step highlight-red">
+            <span class="flow-step-icon">❌</span>
+            <span class="flow-step-label" id="p2-flow5-label">Clone Failed</span>
+            <span class="flow-step-sub" id="p2-flow5-sub">Speaker voice unrecoverable</span>
+          </div>
         </div>
-        <svg class="flow-arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
-        </svg>
-        <div class="flow-step highlight-green">
-          <span class="flow-step-icon">🛡️</span>
-          <span class="flow-step-label">Protection Applied</span>
-          <span class="flow-step-sub">Inaudible signal embedded</span>
-        </div>
-        <svg class="flow-arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
-        </svg>
-        <div class="flow-step">
-          <span class="flow-step-icon">🔊</span>
-          <span class="flow-step-label">Protected Voice</span>
-          <span class="flow-step-sub">Same listening quality</span>
-        </div>
-        <svg class="flow-arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
-        </svg>
-        <div class="flow-step">
-          <span class="flow-step-icon">🤖</span>
-          <span class="flow-step-label">Clone Attempt</span>
-          <span class="flow-step-sub">TTS model training</span>
-        </div>
-        <svg class="flow-arrow" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clip-rule="evenodd"/>
-        </svg>
-        <div class="flow-step highlight-red">
-          <span class="flow-step-icon">❌</span>
-          <span class="flow-step-label">Clone Failed</span>
-          <span class="flow-step-sub">Speaker voice unrecoverable</span>
-        </div>
-      </div>
       </div>
 
     </div>
@@ -162,13 +158,13 @@
     <div class="page-inner" id="page3-content">
 
       <div class="page-header">
-        <span class="page-eyebrow">Audio Demo</span>
-        <h2 class="page-title">Original Voice vs Protected Voice</h2>
-        <p class="page-desc">Even with protection signals embedded, there is little perceptible difference to human ears. Listen for yourself.</p>
+        <span class="page-eyebrow" id="p3-eyebrow">Audio Demo</span>
+        <h2 class="page-title" id="p3-title">Original Voice vs Protected Voice</h2>
+        <p class="page-desc" id="p3-desc">Even with protection signals embedded, there is little perceptible difference to human ears. Listen for yourself.</p>
       </div>
 
       <div class="speaker-selector">
-        <span class="speaker-selector-label">Select Speaker</span>
+        <span class="speaker-selector-label" id="p3-speaker-label">Select Speaker</span>
         <div class="speaker-tabs" id="page3-tabs"></div>
       </div>
 
@@ -185,13 +181,13 @@
     <div class="page-inner" id="page4-content">
 
       <div class="page-header">
-        <span class="page-eyebrow">TTS Demo</span>
-        <h2 class="page-title">Original TTS vs Protected TTS</h2>
-        <p class="page-desc">TTS trained on protected audio has its cloning neutralized, significantly reducing voice similarity.</p>
+        <span class="page-eyebrow" id="p4-eyebrow">TTS Demo</span>
+        <h2 class="page-title" id="p4-title">Original TTS vs Protected TTS</h2>
+        <p class="page-desc" id="p4-desc">TTS trained on protected audio has its cloning neutralized, significantly reducing voice similarity.</p>
       </div>
 
       <div class="speaker-selector">
-        <span class="speaker-selector-label">Select Speaker</span>
+        <span class="speaker-selector-label" id="p4-speaker-label">Select Speaker</span>
         <div class="speaker-tabs" id="page4-tabs"></div>
       </div>
 
@@ -208,13 +204,13 @@
     <div class="page-inner" id="page5-content">
 
       <div class="page-header">
-        <span class="page-eyebrow">Comparison</span>
-        <h2 class="page-title">Compare All 4 Voices at a Glance</h2>
-        <p class="page-desc">From original to failed clone — experience the effect of protection technology firsthand.</p>
+        <span class="page-eyebrow" id="p5-eyebrow">Comparison</span>
+        <h2 class="page-title" id="p5-title">Compare All 4 Voices at a Glance</h2>
+        <p class="page-desc" id="p5-desc">From original to failed clone — experience the effect of protection technology firsthand.</p>
       </div>
 
       <div class="speaker-selector">
-        <span class="speaker-selector-label">Select Speaker</span>
+        <span class="speaker-selector-label" id="p5-speaker-label">Select Speaker</span>
         <div class="speaker-tabs" id="page5-tabs"></div>
       </div>
 
